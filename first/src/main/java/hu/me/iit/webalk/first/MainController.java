@@ -19,54 +19,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path= "article")
 public class MainController {
 	
-	private final List<ArticleDto> articles = new ArrayList<>();
+	private final ArticleService articleService;
 	
+	public MainController(ArticleService articleService) {
+		this.articleService = articleService;
+	}
+
 	@GetMapping(path= "", produces =MediaType.APPLICATION_JSON_VALUE)
 	List<ArticleDto> allArticles() {
-		return articles;
+		return articleService.findAll();
 	}
 	
 	@PostMapping(path= "")
-	public void newArticle(@RequestBody ArticleDto articleDto) {
-		articles.add(articleDto);
+	public void newArticle(@RequestBody @Valid ArticleDto articleDto) {
+		articleService.save(articleDto);
 	}
-	
-	private int findArticleById (String id) {
-		int found = -1;
-		
-		for (int i = 0; i < articles.size(); i++) {
-			if (articles.get(i).getTitle().equals(id)) {
-				found = i;
-				break;
-			}
-		}
-		return found;
-	}
+
 	
 	@PutMapping(path= "{id}")
-	public void replaceArticle(@PathVariable ("id") String id, @RequestBody ArticleDto articleDto) {
-		int found = findArticleById(id);
-		
-		if (found != -1) {
-			ArticleDto foundArticle = articles.get(found);
-			foundArticle.setAuthor(articleDto.getAuthor());
-			foundArticle.setPages(articleDto.getPages());
-		}
+	public void replaceArticle(@PathVariable ("id") Long id, @RequestBody @Valid ArticleDto articleDto) {
+		articleService.save(articleDto);
 	}
 	
 	@DeleteMapping(path= "{id}")
-	public void deleteArticle(@PathVariable ("id") String id) {
-		int found = -1;
-		for (int i = 0; i < articles.size(); i++) {
-			if (articles.get(i).getTitle().equals(id)) {
-				found = i;
-				break;
-			}
-		}
-		
-		if (found != -1) {
-			articles.remove(found);
-		}
+	public void deleteArticle(@PathVariable ("id") Long id) {
+		articleService.deleteById(id);
 	}
 
 }
