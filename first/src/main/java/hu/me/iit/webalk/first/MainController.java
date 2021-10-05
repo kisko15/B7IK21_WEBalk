@@ -44,7 +44,7 @@ public class MainController {
 	}
 	
 	@PutMapping(path= "{id}")
-	public void replaceArticle(@PathVariable ("id") String id, @RequestBody @Valid ArticleDto articleDto) {
+	public void replaceArticle(@PathVariable ("id") String id, @RequestBody ArticleDto articleDto) {
 		int found = findArticleById(id);
 		
 		if (found != -1) {
