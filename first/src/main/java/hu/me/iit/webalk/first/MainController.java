@@ -1,6 +1,5 @@
 package hu.me.iit.webalk.first;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,7 +24,7 @@ public class MainController {
 		this.articleService = articleService;
 	}
 
-	@GetMapping(path= "", produces =MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path= "", produces = MediaType.APPLICATION_JSON_VALUE)
 	List<ArticleDto> allArticles() {
 		return articleService.findAll();
 	}

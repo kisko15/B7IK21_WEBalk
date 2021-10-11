@@ -29,6 +29,7 @@ public class ArticleMemoryRepository implements ArticleRepository {
 
 	@Override
 	public ArticleDto getById(Long id) {
+		int findArticleByIdIndex = findArticleById(id);
 		return null;
 	}
 
