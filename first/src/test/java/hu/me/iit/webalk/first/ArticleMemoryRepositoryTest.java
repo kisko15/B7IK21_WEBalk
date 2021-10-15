@@ -80,7 +80,8 @@ class ArticleMemoryRepositoryTest {
 	        // THEN
 	        assertEquals(-1, result);
 	    }
-
+	    
+	    
 	    @Test
 	    void deleteById_exists() {
 	        // GIVEN
