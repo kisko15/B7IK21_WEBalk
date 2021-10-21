@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -20,11 +21,12 @@ class ServiceImplTest {
 
 	@Test
 	void testCalculate() {
-		//given
+		//GIVEN
 		
-		//when
+		//WHEN
 		service.calculate();
-		//then
+		
+		//THEN
 		verify(dependency, times(1)).helpNoParameterNoReturnValue();
 	}
 	
@@ -54,5 +56,22 @@ class ServiceImplTest {
 		verify(dependency, times(1)).helpNoParameterReturnValue();
 		assertEquals(FIVE, result);
 	}
+	
+	@Test
+	void dependencyCaptorCall() {
+		//GIVEN
+		final int FIVE = 5;
+		
+		//WHEN
+		service.callHelpAndPassParameter5();
+		
+		//THEN
+		ArgumentCaptor<Integer> captor = ArgumentCaptor.forClass(Integer.class);
+		
+		verify(dependency, times(1)).helpWithParameterNoReturnValue(captor.capture());
+		assertEquals(FIVE, captor.getValue());
+	}
+	
+	
 
 }
