@@ -1,4 +1,4 @@
-package hu.me.iit.miskolc.webalk.db;
+package hu.me.iit.miskolc.webalk.db.repository;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,6 +38,19 @@ public class People {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public People() {
+		
+	}
+
+	public People(Long id, int age, String name) {
+		super();
+		this.id = id;
+		this.age = age;
+		this.name = name;
+	}
+	
+	
 	
 	
 }
