@@ -41,4 +41,9 @@ public class PeopleServiceImpl implements PeopleService {
 		return new People(peopleRepository.save(people.toEntity()));	
 	}
 
+	@Override
+	public void deleteById(Long id) {
+		peopleRepository.deleteById(id);
+	}
+
 }

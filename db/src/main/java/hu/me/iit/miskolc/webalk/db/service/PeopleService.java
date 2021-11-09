@@ -6,4 +6,5 @@ public interface PeopleService {
 
 	People create(People people);
 
+	void deleteById(Long id);
 }
