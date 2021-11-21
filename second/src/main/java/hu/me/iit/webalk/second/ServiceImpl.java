@@ -1,11 +1,18 @@
 package hu.me.iit.webalk.second;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ServiceImpl implements Service {
 
 	private final Dependency dependency;
+	private String value;
+
+    @Value("${sajat-cucc}")
+    public void setValue(String value) {
+        this.value = value;
+    }
 	
 	public ServiceImpl(Dependency dependency) {
 		this.dependency = dependency;
@@ -30,12 +37,8 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public String getImplementAbstract(String name) {
-		final String massage = "...";
-		
-		String longMassage = name.substring(0, 3);
-				
-		return longMassage;
+	public String getValue() {
+		return value;
 	}
 	
 	

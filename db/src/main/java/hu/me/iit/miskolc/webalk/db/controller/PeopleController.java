@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.me.iit.miskolc.webalk.db.service.People;
@@ -42,8 +44,36 @@ public class PeopleController {
 		return new PeopleDto(peopleService.create(peopleCreateDto.toPeople()));
 	}
 	
+	/*
 	@DeleteMapping(path= "{id}")
 	public void delete(@PathVariable ("id") Long id) {
 		peopleService.deleteById(id);
 	}
+	*/
+	
+	@DeleteMapping(path= "/{id}")
+	public void delete2(@PathVariable ("id") Long id) {
+		peopleService.delete(id);
+	}
+	
+	@GetMapping("/{id}")
+	public PeopleDto getById(@PathVariable Long id) {
+		return new PeopleDto(peopleService.getById(id));
+	}
+	
+	@PutMapping
+	public void save(@RequestBody @Valid PeopleDto peopleDto) {
+		peopleService.save(peopleDto.toPeople());
+	}
+	
+	
+	@GetMapping("/findByAgeGt")
+	public Iterable<PeopleDto> findAdultPeople(@RequestParam("age") int age) {
+		List<hu.me.iit.miskolc.webalk.db.controller.PeopleDto> peopleDtoList = new ArrayList<>();
+		for(People people : peopleService.findByAgeGreatherThan(age)) {
+			peopleDtoList.add(new hu.me.iit.miskolc.webalk.db.controller.PeopleDto(people));
+		}
+		return peopleDtoList;
+	}
+	
 }
