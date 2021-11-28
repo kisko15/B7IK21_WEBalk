@@ -83,9 +83,5 @@ public class PeopleServiceImpl implements PeopleService {
 				.map(People::new).collect(Collectors.toList());
 	}
 
-	public Iterable<People> getAllPeople2() {
-		return StreamSupport.stream(peopleRepository.findAll().spliterator(), false).map(People::new)
-				.collect(Collectors.toList());
-	}
 
 }

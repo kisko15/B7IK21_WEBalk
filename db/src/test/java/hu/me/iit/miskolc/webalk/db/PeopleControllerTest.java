@@ -52,6 +52,6 @@ class PeopleControllerTest {
 		//WHEN THEN 
 		this.mockMvc.perform(get("/people")).andDo(print()).andExpect(jsonPath("$.[0].name", is("2"))).andExpect(jsonPath("$.[0].age", is(22)));
 	}
-
+	
 
 }
